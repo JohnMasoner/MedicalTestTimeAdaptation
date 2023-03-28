@@ -1,5 +1,15 @@
 import warnings
-from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, List, Optional, Sequence, Union
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Callable,
+    Dict,
+    Iterable,
+    List,
+    Optional,
+    Sequence,
+    Union,
+)
 
 import torch
 from torch import nn
@@ -19,7 +29,7 @@ class BaseTrainer(object):
         postprocessing: Optional[Callable] = None,
         key_metric: Optional[Dict[str, Metric]] = None,
         amp: bool = False,
-        is_write_logger: bool = False
+        is_write_logger: bool = False,
     ):
         super().__init__(self._iteration)
 
@@ -30,9 +40,9 @@ class BaseTrainer(object):
                 epoch_length = len(data_loader)
         else:
             if epoch_length is None:
-                raise ValueError("If data_loader is not PyTorch DataLoader, must specify the epoch_length.")
-
-
+                raise ValueError(
+                    "If data_loader is not PyTorch DataLoader, must specify the epoch_length."
+                )
 
     def _iteration(self, engine, batchdata: Dict[str, torch.Tensor]):
         """
@@ -47,7 +57,9 @@ class BaseTrainer(object):
             NotImplementedError: When the subclass does not override this method.
 
         """
-        raise NotImplementedError(f"Subclass {self.__class__.__name__} must implement this method.")
+        raise NotImplementedError(
+            f"Subclass {self.__class__.__name__} must implement this method."
+        )
 
     def get_stats(self, *vars):
         """

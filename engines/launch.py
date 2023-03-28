@@ -56,7 +56,9 @@ def _distributed_worker(
     args,
     timeout=DEFAULT_TIMEOUT,
 ):
-    assert torch.cuda.is_available(), "cuda is not available. Please check your installation."
+    assert (
+        torch.cuda.is_available()
+    ), "cuda is not available. Please check your installation."
     try:
         dist.init_process_group(
             backend="nccl",
@@ -71,4 +73,3 @@ def _distributed_worker(
     torch.cuda.set_device(local_rank)
 
     main_func(*args)
-
